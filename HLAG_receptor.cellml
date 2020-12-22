@@ -1,0 +1,95 @@
+<?xml version='1.0'?>
+<model name="HLAG_receptor" xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cellml="http://www.cellml.org/cellml/1.1#">
+    <!--
+*******************************************************
+***         U   N   I   T   S                       ***
+*******************************************************
+-->
+    <units name="s">
+        <unit units="second"/>
+    </units>
+    <units name="uM">
+        <unit prefix="micro" units="mole"/>
+        <unit exponent="-1" units="liter"/>
+    </units>
+    <units name="per_s">
+        <unit exponent="-1" units="s"/>
+    </units>
+    <units name="uM_per_s">
+        <unit units="uM"/>
+        <unit exponent="-1" units="s"/>
+    </units>
+    <units name="per_uM_per_s">
+        <unit exponent="-1" units="uM"/>
+        <unit exponent="-1" units="s"/>
+    </units>
+    <!--
+*********************************************************
+***       C   O   M   P   O   N   E   N   T   S       ***
+*********************************************************
+-->
+    <component name="environment">
+        <variable name="t" public_interface="out" units="s"/>
+    </component>
+    <component name="HLAG_receptor">
+        <variable name="t" public_interface="in" units="second"/>
+        <variable name="J_hGdl4" public_interface="out" units="uM_per_s"/>
+        <variable initial_value="0.0141382" name="k_f10" public_interface="out" units="per_uM_per_s"/>
+        <variable initial_value="0.014043" name="k_r10" public_interface="out" units="per_s"/>
+        <variable initial_value="0.1052" name="hG" public_interface="out" units="uM"/>
+        <variable initial_value="0.098" name="dl4" units="uM"/>
+        <variable initial_value="0" name="hGdl4" public_interface="out" units="uM"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>J_hGdl4</ci>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>k_f10</ci>
+                        <ci>hG</ci>
+                        <ci>dl4</ci>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k_r10</ci>
+                        <ci>hGdl4</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>hG</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_hGdl4</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>dl4</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_hGdl4</ci>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <connection>
+        <map_components component_1="HLAG_receptor" component_2="environment"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+</model>

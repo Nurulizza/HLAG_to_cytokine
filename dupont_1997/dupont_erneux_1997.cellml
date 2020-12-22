@@ -1,0 +1,855 @@
+<?xml version='1.0'?>
+<!--
+This CellML file was generated on 10/10/2011 at 4:36:34 at PM using:
+
+COR (0.9.31.1409)
+Copyright 2002-2011 Dr Alan Garny
+http://cor.physiol.ox.ac.uk/ - cor@physiol.ox.ac.uk
+
+CellML 1.0 was used to generate this model
+http://www.cellml.org/
+-->
+<model cmeta:id="dupont_erneux_1997" name="dupont_erneux_1997" xmlns="http://www.cellml.org/cellml/1.0#" xmlns:cellml="http://www.cellml.org/cellml/1.0#" xmlns:cmeta="http://www.cellml.org/metadata/1.0#">
+    <units name="micromole">
+        <unit prefix="micro" units="mole"/>
+    </units>
+    <units name="micromolar">
+        <unit units="micromole"/>
+        <unit exponent="-1" units="litre"/>
+    </units>
+    <units name="per_micromolar">
+        <unit exponent="-1" units="micromolar"/>
+    </units>
+    <units name="micromolar_per_second">
+        <unit units="micromolar"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="per_micromolar_per_second">
+        <unit exponent="-1" units="micromolar"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="per_second">
+        <unit exponent="-1" units="second"/>
+    </units>
+    <component name="environment">
+        <variable name="time" public_interface="out" units="second"/>
+    </component>
+    <component name="R_des">
+        <variable initial_value="0.1" name="R_des" public_interface="out" units="micromolar"/>
+        <variable name="K_plus" public_interface="in" units="per_micromolar_per_second"/>
+        <variable name="C_cyto" public_interface="in" units="micromolar"/>
+        <variable name="n_i" public_interface="in" units="dimensionless"/>
+        <variable name="K_act" public_interface="in" units="micromolar"/>
+        <variable name="n_a" public_interface="in" units="dimensionless"/>
+        <variable name="K_minus" public_interface="in" units="per_second"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>R_des</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <apply>
+                            <divide/>
+                            <apply>
+                                <times/>
+                                <ci>K_plus</ci>
+                                <apply>
+                                    <power/>
+                                    <ci>C_cyto</ci>
+                                    <ci>n_i</ci>
+                                </apply>
+                                <cn cellml:units="second">1</cn>
+                                <apply>
+                                    <minus/>
+                                    <cn cellml:units="micromolar">1</cn>
+                                    <ci>R_des</ci>
+                                </apply>
+                            </apply>
+                            <apply>
+                                <plus/>
+                                <cn cellml:units="micromolar">1</cn>
+                                <apply>
+                                    <power/>
+                                    <apply>
+                                        <divide/>
+                                        <ci>C_cyto</ci>
+                                        <ci>K_act</ci>
+                                    </apply>
+                                    <ci>n_a</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <cn cellml:units="per_second">1</cn>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>K_minus</ci>
+                        <ci>R_des</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="C_cyto">
+        <variable initial_value="0.1" name="C_cyto" public_interface="out" units="micromolar"/>
+        <variable name="K_1" public_interface="in" units="per_second"/>
+        <variable name="b" public_interface="in" units="per_second"/>
+        <variable name="n_i" public_interface="in" units="dimensionless"/>
+        <variable name="I_ra" public_interface="in" units="micromolar"/>
+        <variable name="Ca_tot" public_interface="in" units="micromolar"/>
+        <variable name="alpha" public_interface="in" units="dimensionless"/>
+        <variable name="V_MP" public_interface="in" units="micromolar_per_second"/>
+        <variable name="n_p" public_interface="in" units="dimensionless"/>
+        <variable name="K_p" public_interface="in" units="micromolar"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_cyto</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>K_1</ci>
+                        <cn cellml:units="second">1</cn>
+                        <apply>
+                            <plus/>
+                            <apply>
+                                <times/>
+                                <ci>b</ci>
+                                <cn cellml:units="second">1</cn>
+                            </apply>
+                            <apply>
+                                <times/>
+                                <ci>I_ra</ci>
+                                <cn cellml:units="per_micromolar">1</cn>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <ci>Ca_tot</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_cyto</ci>
+                                <apply>
+                                    <plus/>
+                                    <ci>alpha</ci>
+                                    <cn cellml:units="dimensionless">1</cn>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <cn cellml:units="per_second">1</cn>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <apply>
+                            <divide/>
+                            <apply>
+                                <times/>
+                                <ci>V_MP</ci>
+                                <apply>
+                                    <power/>
+                                    <ci>C_cyto</ci>
+                                    <ci>n_p</ci>
+                                </apply>
+                            </apply>
+                            <apply>
+                                <plus/>
+                                <apply>
+                                    <power/>
+                                    <ci>K_p</ci>
+                                    <ci>n_p</ci>
+                                </apply>
+                                <apply>
+                                    <power/>
+                                    <ci>C_cyto</ci>
+                                    <ci>n_p</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <cn cellml:units="per_micromolar">1</cn>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="I_ra">
+        <variable name="I_ra" public_interface="out" units="micromolar"/>
+        <variable name="I_rable" public_interface="in" units="micromolar"/>
+        <variable name="K_act" public_interface="in" units="micromolar"/>
+        <variable name="C_cyto" public_interface="in" units="micromolar"/>
+        <variable name="n_a" public_interface="in" units="dimensionless"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>I_ra</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>I_rable</ci>
+                        <cn cellml:units="dimensionless">1</cn>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <cn cellml:units="dimensionless">1</cn>
+                        <apply>
+                            <power/>
+                            <apply>
+                                <divide/>
+                                <ci>K_act</ci>
+                                <ci>C_cyto</ci>
+                            </apply>
+                            <ci>n_a</ci>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="I_rable">
+        <variable name="I_rable" public_interface="out" units="micromolar"/>
+        <variable name="R_des" public_interface="in" units="micromolar"/>
+        <variable name="IP3" public_interface="in" units="micromolar"/>
+        <variable name="K_IP" public_interface="in" units="micromolar"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>I_rable</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <apply>
+                            <minus/>
+                            <cn cellml:units="micromolar">1</cn>
+                            <ci>R_des</ci>
+                        </apply>
+                        <ci>IP3</ci>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <ci>K_IP</ci>
+                        <ci>IP3</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="IP3">
+        <variable initial_value="0.1" name="IP3" public_interface="out" units="micromolar"/>
+        <variable name="V_PLC" public_interface="in" units="micromolar"/>
+        <variable name="V_3K" public_interface="in" units="micromolar"/>
+        <variable name="V_5P" public_interface="in" units="micromolar"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>IP3</ci>
+                </apply>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <minus/>
+                            <ci>V_PLC</ci>
+                            <ci>V_3K</ci>
+                        </apply>
+                        <ci>V_5P</ci>
+                    </apply>
+                    <cn cellml:units="second">1</cn>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="V_PLC">
+        <variable name="V_PLC" public_interface="out" units="micromolar"/>
+        <variable name="V_plc" public_interface="in" units="micromolar_per_second"/>
+        <variable name="gamma" public_interface="in" units="dimensionless"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>V_PLC</ci>
+                <apply>
+                    <times/>
+                    <ci>gamma</ci>
+                    <ci>V_plc</ci>
+                    <cn cellml:units="second">1</cn>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="V_3K">
+        <variable name="V_3K" public_interface="out" units="micromolar"/>
+        <variable name="IP3" public_interface="in" units="micromolar"/>
+        <variable name="V_k" public_interface="in" units="micromolar_per_second"/>
+        <variable name="K_k" public_interface="in" units="micromolar"/>
+        <variable name="C_cyto" public_interface="in" units="micromolar"/>
+        <variable name="n_d" public_interface="in" units="dimensionless"/>
+        <variable name="K_d" public_interface="in" units="micromolar"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>V_3K</ci>
+                <apply>
+                    <times/>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <apply>
+                                <divide/>
+                                <apply>
+                                    <times/>
+                                    <ci>V_k</ci>
+                                    <ci>IP3</ci>
+                                </apply>
+                                <apply>
+                                    <plus/>
+                                    <ci>K_k</ci>
+                                    <ci>IP3</ci>
+                                </apply>
+                            </apply>
+                            <apply>
+                                <power/>
+                                <ci>C_cyto</ci>
+                                <ci>n_d</ci>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <plus/>
+                            <apply>
+                                <power/>
+                                <ci>K_d</ci>
+                                <ci>n_d</ci>
+                            </apply>
+                            <apply>
+                                <power/>
+                                <ci>C_cyto</ci>
+                                <ci>n_d</ci>
+                            </apply>
+                        </apply>
+                    </apply>
+                    <cn cellml:units="second">1</cn>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="V_5P">
+        <variable name="V_5P" public_interface="out" units="micromolar"/>
+        <variable name="IP3" public_interface="in" units="micromolar"/>
+        <variable name="IP4" public_interface="in" units="micromolar"/>
+        <variable name="V_p1" public_interface="in" units="micromolar_per_second"/>
+        <variable name="K_p1" public_interface="in" units="micromolar"/>
+        <variable name="K_p2" public_interface="in" units="micromolar"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>V_5P</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>V_p1</ci>
+                        <cn cellml:units="second">1</cn>
+                        <ci>IP3</ci>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <apply>
+                            <times/>
+                            <ci>K_p1</ci>
+                            <apply>
+                                <plus/>
+                                <cn cellml:units="dimensionless">1</cn>
+                                <apply>
+                                    <divide/>
+                                    <ci>IP4</ci>
+                                    <ci>K_p2</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <ci>IP3</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="IP4">
+        <variable initial_value="0.1" name="IP4" public_interface="out" units="micromolar"/>
+        <variable name="V_3K" public_interface="in" units="micromolar"/>
+        <variable name="V_15P" public_interface="in" units="micromolar"/>
+        <variable name="k" public_interface="in" units="per_second"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>IP4</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <apply>
+                            <minus/>
+                            <ci>V_3K</ci>
+                            <ci>V_15P</ci>
+                        </apply>
+                        <cn cellml:units="per_second">1</cn>
+                    </apply>
+                    <apply>
+                        <times/>
+                        <ci>k</ci>
+                        <ci>IP4</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="V_15P">
+        <variable name="V_15P" public_interface="out" units="micromolar"/>
+        <variable name="IP3" public_interface="in" units="micromolar"/>
+        <variable name="IP4" public_interface="in" units="micromolar"/>
+        <variable name="V_p2" public_interface="in" units="micromolar_per_second"/>
+        <variable name="K_p1" public_interface="in" units="micromolar"/>
+        <variable name="K_p2" public_interface="in" units="micromolar"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>V_15P</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>V_p2</ci>
+                        <cn cellml:units="second">1</cn>
+                        <ci>IP4</ci>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <apply>
+                            <times/>
+                            <ci>K_p2</ci>
+                            <apply>
+                                <plus/>
+                                <cn cellml:units="dimensionless">1</cn>
+                                <apply>
+                                    <divide/>
+                                    <ci>IP3</ci>
+                                    <ci>K_p1</ci>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <ci>IP4</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <component name="model_parameters">
+        <variable initial_value="1.3" name="V_plc" public_interface="out" units="micromolar_per_second"/>
+        <variable initial_value="0.5" name="V_k" public_interface="out" units="micromolar_per_second"/>
+        <variable initial_value="1" name="K_k" public_interface="out" units="micromolar"/>
+        <variable initial_value="0.3" name="K_d" public_interface="out" units="micromolar"/>
+        <variable initial_value="2" name="n_d" public_interface="out" units="dimensionless"/>
+        <variable initial_value="5" name="V_p1" public_interface="out" units="micromolar_per_second"/>
+        <variable initial_value="10" name="K_p1" public_interface="out" units="micromolar"/>
+        <variable initial_value="0.2" name="V_p2" public_interface="out" units="micromolar_per_second"/>
+        <variable initial_value="2" name="K_p2" public_interface="out" units="micromolar"/>
+        <variable initial_value="0.01" name="k" public_interface="out" units="per_second"/>
+        <variable initial_value="0.2" name="gamma" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.1" name="alpha" public_interface="out" units="dimensionless"/>
+        <variable initial_value="80" name="Ca_tot" public_interface="out" units="micromolar"/>
+        <variable initial_value="4" name="V_MP" public_interface="out" units="micromolar_per_second"/>
+        <variable initial_value="0.35" name="K_p" public_interface="out" units="micromolar"/>
+        <variable initial_value="2" name="n_p" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.56" name="K_act" public_interface="out" units="micromolar"/>
+        <variable initial_value="0.15" name="K_inh" public_interface="out" units="micromolar"/>
+        <variable initial_value="3" name="n_a" public_interface="out" units="dimensionless"/>
+        <variable initial_value="4" name="n_i" public_interface="out" units="dimensionless"/>
+        <variable initial_value="0.5" name="K_minus" public_interface="out" units="per_second"/>
+        <variable name="K_plus" public_interface="out" units="per_micromolar_per_second"/>
+        <variable initial_value="0.0007" name="b" public_interface="out" units="per_second"/>
+        <variable initial_value="2.57" name="K_1" public_interface="out" units="per_second"/>
+        <variable initial_value="1" name="K_IP" public_interface="out" units="micromolar"/>
+        <variable name="time" public_interface="in" units="second"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>K_plus</ci>
+                <apply>
+                    <divide/>
+                    <ci>K_minus</ci>
+                    <apply>
+                        <power/>
+                        <ci>K_inh</ci>
+                        <ci>n_i</ci>
+                    </apply>
+                </apply>
+            </apply>
+        </math>
+    </component>
+    <connection>
+        <map_components component_1="environment" component_2="model_parameters"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="R_des"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="C_cyto"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="I_ra"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="I_rable"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="IP3"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="V_PLC"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="V_3K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="V_5P"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="IP4"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="V_15P"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection>
+        <map_components component_1="R_des" component_2="model_parameters"/>
+        <map_variables variable_1="K_plus" variable_2="K_plus"/>
+        <map_variables variable_1="n_i" variable_2="n_i"/>
+        <map_variables variable_1="K_act" variable_2="K_act"/>
+        <map_variables variable_1="n_a" variable_2="n_a"/>
+        <map_variables variable_1="K_minus" variable_2="K_minus"/>
+    </connection>
+    <connection>
+        <map_components component_1="C_cyto" component_2="model_parameters"/>
+        <map_variables variable_1="K_1" variable_2="K_1"/>
+        <map_variables variable_1="b" variable_2="b"/>
+        <map_variables variable_1="Ca_tot" variable_2="Ca_tot"/>
+        <map_variables variable_1="alpha" variable_2="alpha"/>
+        <map_variables variable_1="V_MP" variable_2="V_MP"/>
+        <map_variables variable_1="n_p" variable_2="n_p"/>
+        <map_variables variable_1="K_p" variable_2="K_p"/>
+        <map_variables variable_1="n_i" variable_2="n_i"/>
+    </connection>
+    <connection>
+        <map_components component_1="I_ra" component_2="model_parameters"/>
+        <map_variables variable_1="n_a" variable_2="n_a"/>
+        <map_variables variable_1="K_act" variable_2="K_act"/>
+    </connection>
+    <connection>
+        <map_components component_1="I_rable" component_2="model_parameters"/>
+        <map_variables variable_1="K_IP" variable_2="K_IP"/>
+    </connection>
+    <connection>
+        <map_components component_1="V_PLC" component_2="model_parameters"/>
+        <map_variables variable_1="gamma" variable_2="gamma"/>
+        <map_variables variable_1="V_plc" variable_2="V_plc"/>
+    </connection>
+    <connection>
+        <map_components component_1="V_3K" component_2="model_parameters"/>
+        <map_variables variable_1="K_d" variable_2="K_d"/>
+        <map_variables variable_1="K_k" variable_2="K_k"/>
+        <map_variables variable_1="n_d" variable_2="n_d"/>
+        <map_variables variable_1="V_k" variable_2="V_k"/>
+    </connection>
+    <connection>
+        <map_components component_1="V_5P" component_2="model_parameters"/>
+        <map_variables variable_1="V_p1" variable_2="V_p1"/>
+        <map_variables variable_1="K_p1" variable_2="K_p1"/>
+        <map_variables variable_1="K_p2" variable_2="K_p2"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP4" component_2="model_parameters"/>
+        <map_variables variable_1="k" variable_2="k"/>
+    </connection>
+    <connection>
+        <map_components component_1="V_15P" component_2="model_parameters"/>
+        <map_variables variable_1="V_p2" variable_2="V_p2"/>
+        <map_variables variable_1="K_p2" variable_2="K_p2"/>
+        <map_variables variable_1="K_p1" variable_2="K_p1"/>
+    </connection>
+    <connection>
+        <map_components component_1="I_rable" component_2="R_des"/>
+        <map_variables variable_1="R_des" variable_2="R_des"/>
+    </connection>
+    <connection>
+        <map_components component_1="C_cyto" component_2="R_des"/>
+        <map_variables variable_1="C_cyto" variable_2="C_cyto"/>
+    </connection>
+    <connection>
+        <map_components component_1="C_cyto" component_2="I_ra"/>
+        <map_variables variable_1="C_cyto" variable_2="C_cyto"/>
+        <map_variables variable_1="I_ra" variable_2="I_ra"/>
+    </connection>
+    <connection>
+        <map_components component_1="C_cyto" component_2="V_3K"/>
+        <map_variables variable_1="C_cyto" variable_2="C_cyto"/>
+    </connection>
+    <connection>
+        <map_components component_1="I_ra" component_2="I_rable"/>
+        <map_variables variable_1="I_rable" variable_2="I_rable"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP3" component_2="I_rable"/>
+        <map_variables variable_1="IP3" variable_2="IP3"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP3" component_2="V_PLC"/>
+        <map_variables variable_1="V_PLC" variable_2="V_PLC"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP3" component_2="V_3K"/>
+        <map_variables variable_1="IP3" variable_2="IP3"/>
+        <map_variables variable_1="V_3K" variable_2="V_3K"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP3" component_2="V_5P"/>
+        <map_variables variable_1="IP3" variable_2="IP3"/>
+        <map_variables variable_1="V_5P" variable_2="V_5P"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP3" component_2="V_15P"/>
+        <map_variables variable_1="IP3" variable_2="IP3"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP4" component_2="V_5P"/>
+        <map_variables variable_1="IP4" variable_2="IP4"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP4" component_2="V_15P"/>
+        <map_variables variable_1="IP4" variable_2="IP4"/>
+        <map_variables variable_1="V_15P" variable_2="V_15P"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP4" component_2="V_3K"/>
+        <map_variables variable_1="V_3K" variable_2="V_3K"/>
+    </connection>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n1">
+            <boundIntervals xmlns="http://www.cellml.org/metadata/simulation/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n2"/>
+            </boundIntervals>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n2">
+            <rdf:first xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n3"/>
+            </rdf:first>
+            <rdf:rest xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:rest>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n4">
+            <Family xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Nielsen</Family>
+            <Given xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Hanne</Given>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n5">
+            <rdf:value xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n6"/>
+            </rdf:value>
+            <subject_type xmlns="http://www.cellml.org/bqs/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">keyword</subject_type>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n6">
+            <rdf:type xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag"/>
+            </rdf:type>
+            <rdf:_2 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">liver</rdf:_2>
+            <rdf:_1 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">hepatology</rdf:_1>
+            <rdf:_3 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">hepatocyte</rdf:_3>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n7">
+            <Person xmlns="http://www.cellml.org/bqs/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n8"/>
+            </Person>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n8">
+            <N xmlns="http://www.w3.org/2001/vcard-rdf/3.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n9"/>
+            </N>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n10">
+            <Pubmed_id xmlns="http://www.cellml.org/bqs/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace"> 9448939 </Pubmed_id>
+            <JournalArticle xmlns="http://www.cellml.org/bqs/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n11"/>
+            </JournalArticle>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n11">
+            <title xmlns="http://purl.org/dc/elements/1.1/" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+          Simulations of the effects of inositol 1,4,5-trisphosphate 3-kinase and 5-phosphatase activities on Ca2+ oscillations
+          </title>
+            <creator xmlns="http://purl.org/dc/elements/1.1/">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n12"/>
+            </creator>
+            <issued xmlns="http://purl.org/dc/terms/">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n13"/>
+            </issued>
+            <Journal xmlns="http://www.cellml.org/bqs/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n14"/>
+            </Journal>
+            <volume xmlns="http://www.cellml.org/bqs/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">22(5)</volume>
+            <first_page xmlns="http://www.cellml.org/bqs/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">321</first_page>
+            <last_page xmlns="http://www.cellml.org/bqs/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">331</last_page>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n3">
+            <endingValue xmlns="http://www.cellml.org/metadata/simulation/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">20</endingValue>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n15">
+            <W3CDTF xmlns="http://purl.org/dc/terms/" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">2011-09-26</W3CDTF>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n16">
+            <Person xmlns="http://www.cellml.org/bqs/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n17"/>
+            </Person>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n17">
+            <N xmlns="http://www.w3.org/2001/vcard-rdf/3.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n18"/>
+            </N>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n18">
+            <Family xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Dupont</Family>
+            <Given xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">G</Given>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="#dupont_erneux_1997">
+            <simulation xmlns="http://www.cellml.org/metadata/simulation/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n1"/>
+            </simulation>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n19">
+            <Family xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Marhl</Family>
+            <Given xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">M</Given>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n20">
+            <subject xmlns="http://purl.org/dc/elements/1.1/">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n5"/>
+            </subject>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n14">
+            <title xmlns="http://purl.org/dc/elements/1.1/" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Cell Calcium</title>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="">
+            <creator xmlns="http://purl.org/dc/elements/1.1/">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n21"/>
+            </creator>
+            <created xmlns="http://purl.org/dc/terms/">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n15"/>
+            </created>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n21">
+            <N xmlns="http://www.w3.org/2001/vcard-rdf/3.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n4"/>
+            </N>
+            <EMAIL xmlns="http://www.w3.org/2001/vcard-rdf/3.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n22"/>
+            </EMAIL>
+            <ORG xmlns="http://www.w3.org/2001/vcard-rdf/3.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n23"/>
+            </ORG>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n24">
+            <Person xmlns="http://www.cellml.org/bqs/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n25"/>
+            </Person>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n25">
+            <N xmlns="http://www.w3.org/2001/vcard-rdf/3.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n19"/>
+            </N>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n12">
+            <rdf:type xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"/>
+            </rdf:type>
+            <rdf:_2 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n7"/>
+            </rdf:_2>
+            <rdf:_1 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n16"/>
+            </rdf:_1>
+            <rdf:_3 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n24"/>
+            </rdf:_3>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n13">
+            <W3CDTF xmlns="http://purl.org/dc/terms/" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">2011-10-10</W3CDTF>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n9">
+            <Family xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Erneux</Family>
+            <Given xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">C</Given>
+            <Other xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Z</Other>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n22">
+            <rdf:type xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://imc.org/vCard/3.0#internet"/>
+            </rdf:type>
+            <rdf:value xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">hnie010@aucklanduni.ac.nz</rdf:value>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n23">
+            <Orgname xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">The University of Auckland</Orgname>
+            <Orgunit xmlns="http://www.w3.org/2001/vcard-rdf/3.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Auckland Bioengineering Institute</Orgunit>
+        </rdf:Description>
+        <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="#grubelnik_2001a">
+            <cmeta:species xmlns:cmeta="http://www.cellml.org/metadata/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Human</cmeta:species>
+            <cmeta:bio_entity xmlns:cmeta="http://www.cellml.org/metadata/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">hepatocyte</cmeta:bio_entity>
+            <cmeta:bio_entity xmlns:cmeta="http://www.cellml.org/metadata/1.0#" xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">Liver</cmeta:bio_entity>
+            <reference xmlns="http://www.cellml.org/bqs/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n10"/>
+            </reference>
+            <reference xmlns="http://www.cellml.org/bqs/1.0#">
+                <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:nodeID="n20"/>
+            </reference>
+        </rdf:Description>
+    </rdf:RDF>
+</model>
