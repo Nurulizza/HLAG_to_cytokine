@@ -8,19 +8,19 @@
     <units name="s">
         <unit units="second"/>
     </units>
-    <units name="nM">
-        <unit prefix="nano" units="mole"/>
+    <units name="uM">
+        <unit prefix="micro" units="mole"/>
         <unit exponent="-1" units="liter"/>
     </units>
     <units name="per_s">
         <unit exponent="-1" units="s"/>
     </units>
-    <units name="nM_per_s">
-        <unit units="nM"/>
+    <units name="uM_per_s">
+        <unit units="uM"/>
         <unit exponent="-1" units="s"/>
     </units>
-    <units name="per_nM_s">
-        <unit exponent="-1" units="nM"/>
+    <units name="per_uM_s">
+        <unit exponent="-1" units="uM"/>
         <unit exponent="-1" units="s"/>
     </units>
     <!--
@@ -29,40 +29,42 @@
 *********************************************************
 -->
     <component name="NFAT_Cycling">
-        <variable cmeta:id="v4" initial_value="7.68934e-6" name="k_f1" private_interface="out" units="per_nM_s"/>
+        <variable cmeta:id="v4" initial_value="7.68934e-3" name="k_f1" private_interface="out" units="per_uM_s"/>
         <variable cmeta:id="v5" initial_value="0.00144192" name="k_f2" private_interface="out" units="per_s"/>
         <variable cmeta:id="v6" initial_value="0.000361944" name="k_f3" private_interface="out" units="per_s"/>
         <variable cmeta:id="v7" initial_value="0.000444695" name="k_f4" private_interface="out" units="per_s"/>
         <variable cmeta:id="v8" initial_value="0.019256" name="k_r1" private_interface="out" units="per_s"/>
-        <variable cmeta:id="v9" initial_value="4.70813e-5" name="k_r3" private_interface="out" units="per_nM_s"/>
-        <variable cmeta:id="v10" name="NFATp_n" private_interface="in" public_interface="out" units="nM"/>
-        <variable cmeta:id="v11" name="NFATp_c" private_interface="in" public_interface="out" units="nM"/>
-        <variable cmeta:id="v12" name="NFATN_n" private_interface="in" public_interface="out" units="nM"/>
-        <variable cmeta:id="v13" name="NFATN_c" private_interface="in" public_interface="out" units="nM"/>
+        <variable cmeta:id="v9" initial_value="0.0470813" name="k_r3" private_interface="out" units="per_uM_s"/>
+        <variable cmeta:id="v10" name="NFATp_n" private_interface="in" public_interface="out" units="uM"/>
+        <variable cmeta:id="v11" name="NFATp_c" private_interface="in" public_interface="out" units="uM"/>
+        <variable cmeta:id="v12" name="NFATN_n" private_interface="in" public_interface="out" units="uM"/>
+        <variable cmeta:id="v13" name="NFATN_c" private_interface="in" public_interface="out" units="uM"/>
         <variable cmeta:id="v14" name="act_N" private_interface="out" public_interface="in" units="dimensionless"/>
-        <variable cmeta:id="v15" name="Ntot" private_interface="out" public_interface="in" units="nM"/>
+        <variable cmeta:id="v15" name="Ntot" private_interface="out" public_interface="in" units="uM"/>
         <variable cmeta:id="v16" name="Ccn" private_interface="out" public_interface="in" units="dimensionless"/>
         <variable cmeta:id="v17" name="t" private_interface="out" public_interface="in" units="s"/>
+        <variable name="J_NFATNn" private_interface="in" public_interface="out" units="uM_per_s"/>
     </component>
     <component name="NFAT_Cycling_equations">
-        <variable cmeta:id="v0" name="J1" units="nM_per_s"/>
-        <variable cmeta:id="v1" name="J2" units="nM_per_s"/>
-        <variable cmeta:id="v2" name="J3" units="nM_per_s"/>
-        <variable cmeta:id="v3" name="J4" units="nM_per_s"/>
-        <variable cmeta:id="v4" name="k_f1" public_interface="in" units="per_nM_s"/>
+        <variable cmeta:id="v0" name="J1" units="uM_per_s"/>
+        <variable cmeta:id="v1" name="J2" units="uM_per_s"/>
+        <variable cmeta:id="v2" name="J3" units="uM_per_s"/>
+        <variable cmeta:id="v3" name="J4" units="uM_per_s"/>
+        <variable cmeta:id="v4" name="k_f1" public_interface="in" units="per_uM_s"/>
         <variable cmeta:id="v5" name="k_f2" public_interface="in" units="per_s"/>
         <variable cmeta:id="v6" name="k_f3" public_interface="in" units="per_s"/>
         <variable cmeta:id="v7" name="k_f4" public_interface="in" units="per_s"/>
         <variable cmeta:id="v8" name="k_r1" public_interface="in" units="per_s"/>
-        <variable cmeta:id="v9" name="k_r3" public_interface="in" units="per_nM_s"/>
-        <variable cmeta:id="v10" initial_value="0.077917275" name="NFATp_n" public_interface="out" units="nM"/>
-        <variable cmeta:id="v11" initial_value="0.9957805651" name="NFATp_c" public_interface="out" units="nM"/>
-        <variable cmeta:id="v12" initial_value="0.10902441" name="NFATN_n" public_interface="out" units="nM"/>
-        <variable cmeta:id="v13" initial_value="0.0004806012" name="NFATN_c" public_interface="out" units="nM"/>
+        <variable cmeta:id="v9" name="k_r3" public_interface="in" units="per_uM_s"/>
+        <variable cmeta:id="v10" initial_value="0.000077917275" name="NFATp_n" public_interface="out" units="uM"/>
+        <variable cmeta:id="v11" initial_value="0.0009957805651" name="NFATp_c" public_interface="out" units="uM"/>
+        <variable cmeta:id="v12" initial_value="0.00010902441" name="NFATN_n" public_interface="out" units="uM"/>
+        <variable cmeta:id="v13" initial_value="0.0000004806012" name="NFATN_c" public_interface="out" units="uM"/>
         <variable cmeta:id="v14" name="act_N" public_interface="in" units="dimensionless"/>
-        <variable cmeta:id="v15" name="Ntot" public_interface="in" units="nM"/>
+        <variable cmeta:id="v15" name="Ntot" public_interface="in" units="uM"/>
         <variable cmeta:id="v16" name="Ccn" public_interface="in" units="dimensionless"/>
         <variable cmeta:id="v17" name="t" public_interface="in" units="s"/>
+        <variable name="J_NFATNn" public_interface="out" units="uM_per_s"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
                 <eq/>
@@ -88,7 +90,6 @@
                     </apply>
                 </apply>
             </apply>
-            <!--        J1 = k_f1*NFATp_c*Ntot-k_r1*NFATN_c*1{dimensionless};-->
             <apply id="eq_0">
                 <eq/>
                 <ci>J2</ci>
@@ -122,7 +123,6 @@
                     </apply>
                 </apply>
             </apply>
-            <!--        J3 = k_f3*NFATN_n*1{dimensionless}-k_r3*NFATp_n*Ntot;-->
             <apply id="eq_1">
                 <eq/>
                 <ci>J4</ci>
@@ -130,6 +130,19 @@
                     <times/>
                     <ci>k_f4</ci>
                     <ci>NFATp_n</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <ci>J_NFATNn</ci>
+                <apply>
+                    <minus/>
+                    <apply>
+                        <times/>
+                        <ci>J2</ci>
+                        <ci>Ccn</ci>
+                    </apply>
+                    <ci>J3</ci>
                 </apply>
             </apply>
             <apply>
@@ -175,15 +188,7 @@
                     </bvar>
                     <ci>NFATN_n</ci>
                 </apply>
-                <apply>
-                    <minus/>
-                    <apply>
-                        <times/>
-                        <ci>J2</ci>
-                        <ci>Ccn</ci>
-                    </apply>
-                    <ci>J3</ci>
-                </apply>
+                <ci>J_NFATNn</ci>
             </apply>
             <apply>
                 <eq/>
@@ -224,6 +229,7 @@
         <map_variables variable_1="Ntot" variable_2="Ntot"/>
         <map_variables variable_1="Ccn" variable_2="Ccn"/>
         <map_variables variable_1="t" variable_2="t"/>
+        <map_variables variable_1="J_NFATNn" variable_2="J_NFATNn"/>
     </connection>
     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
         <rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://www.cellml.org/cellml/1.1#NFATCycling">

@@ -1,0 +1,219 @@
+<?xml version='1.0'?>
+<model name="plat_plc" xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cellml="http://www.cellml.org/cellml/1.1#" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <import xlink:href="../hC_hE_icam_activation.cellml">
+        <component component_ref="hC_hE_icam_activation" name="hC_hE_icam_activation"/>
+    </import>
+    <import xlink:href="../dupont_erneux_1997_noIP4.cellml">
+        <component component_ref="geometry" name="geometry"/>
+    </import>
+    <import xlink:href="../dupont_Ca/dupont_erneux_1997.cellml">
+        <component component_ref="IP3" name="IP3"/>
+        <component component_ref="IP4" name="IP4"/>
+        <component component_ref="V_3K" name="V_3K"/>
+        <component component_ref="C_cyto" name="C_cyto"/>
+        <component component_ref="V_PLC" name="V_PLC"/>
+        <component component_ref="model_parameters" name="model_parameters"/>
+        <component component_ref="V_5P" name="V_5P"/>
+        <component component_ref="V_15P" name="V_15P"/>
+        <component component_ref="I_ra" name="I_ra"/>
+        <component component_ref="I_rable" name="I_rable"/>
+        <component component_ref="R_des" name="R_des"/>
+    </import>
+    <!--    def import using "../dupont_Ca/dupont_erneux_1997.cellml" for
+        comp IP4 using comp IP4;
+    enddef;-->
+    <!--    def import using "../dupont_Ca/dupont_erneux_1997.cellml" for
+        comp C_cyto using comp C_cyto;
+    enddef;-->
+    <!--    def import using "../dupont_Ca/dupont_erneux_1997.cellml" for
+        comp V_PLC using comp V_PLC;
+    enddef;-->
+    <!--
+*******************************************************
+***         U   N   I   T   S                       ***
+*******************************************************
+-->
+    <units name="s">
+        <unit units="second"/>
+    </units>
+    <units name="uM">
+        <unit prefix="micro" units="mole"/>
+        <unit exponent="-1" units="litre"/>
+    </units>
+    <units name="per_second">
+        <unit exponent="-1" units="second"/>
+    </units>
+    <units name="uM_per_second">
+        <unit units="uM"/>
+        <unit exponent="-1" units="second"/>
+    </units>
+    <!--
+     *********************************************************
+     ***       C   O   M   P   O   N   E   N   T   S       ***
+     *********************************************************
+-->
+    <component name="environment">
+        <variable name="t" public_interface="out" units="second"/>
+    </component>
+    <component name="plat_plc">
+        <variable name="t" public_interface="in" units="second"/>
+        <variable name="J1" units="uM_per_second"/>
+        <variable initial_value="0" name="k_f1" units="per_second"/>
+        <variable name="J_plat" public_interface="in" units="uM_per_second"/>
+        <variable initial_value="0" name="plc" units="uM"/>
+        <variable initial_value="0" name="K_1" units="uM"/>
+        <variable initial_value="0" name="plat" units="uM"/>
+        <variable name="V_PLC" public_interface="in" units="uM"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+                <eq/>
+                <ci>J1</ci>
+                <apply>
+                    <divide/>
+                    <apply>
+                        <times/>
+                        <ci>k_f1</ci>
+                        <ci>J_plat</ci>
+                        <ci>plc</ci>
+                    </apply>
+                    <apply>
+                        <plus/>
+                        <ci>K_1</ci>
+                        <ci>plc</ci>
+                    </apply>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>plat</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_plat</ci>
+                    <ci>J1</ci>
+                </apply>
+            </apply>
+            <apply>
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>t</ci>
+                    </bvar>
+                    <ci>plc</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J1</ci>
+                </apply>
+            </apply>
+        </math>
+        <!--ode(V_PLC, t) = -J1;-->
+    </component>
+    <group>
+        <relationship_ref relationship="encapsulation"/>
+        <component_ref component="geometry">
+            <component_ref component="plat_plc"/>
+            <component_ref component="hC_hE_icam_activation"/>
+        </component_ref>
+    </group>
+    <connection>
+        <map_components component_1="IP3" component_2="V_PLC"/>
+        <map_variables variable_1="V_PLC" variable_2="V_PLC"/>
+    </connection>
+    <connection>
+        <map_components component_1="geometry" component_2="V_PLC"/>
+        <map_variables variable_1="V_PLC" variable_2="V_PLC"/>
+    </connection>
+    <connection>
+        <map_components component_1="geometry" component_2="C_cyto"/>
+        <map_variables variable_1="C_cyto" variable_2="C_cyto"/>
+    </connection>
+    <connection>
+        <map_components component_1="geometry" component_2="IP3"/>
+        <map_variables variable_1="IP3" variable_2="IP3"/>
+    </connection>
+    <connection>
+        <map_components component_1="IP3" component_2="V_3K"/>
+        <map_variables variable_1="V_3K" variable_2="V_3K"/>
+        <map_variables variable_1="IP3" variable_2="IP3"/>
+    </connection>
+    <connection>
+        <map_components component_1="geometry" component_2="IP4"/>
+        <map_variables variable_1="IP4" variable_2="IP4"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="geometry"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="C_cyto"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="IP3"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="V_3K"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="IP4"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="V_PLC"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="geometry" component_2="plat_plc"/>
+        <map_variables variable_1="t" variable_2="t"/>
+        <map_variables variable_1="V_PLC" variable_2="V_PLC"/>
+    </connection>
+    <connection>
+        <map_components component_1="geometry" component_2="hC_hE_icam_activation"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="plat_plc" component_2="hC_hE_icam_activation"/>
+        <map_variables variable_1="J_plat" variable_2="J_plat"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="V_5P"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="V_15P"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="I_ra"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="model_parameters"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="I_rable"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+    <connection>
+        <map_components component_1="I_rable" component_2="model_parameters"/>
+        <map_variables variable_1="K_IP" variable_2="K_IP"/>
+    </connection>
+    <connection>
+        <map_components component_1="I_rable" component_2="R_des"/>
+        <map_variables variable_1="R_des" variable_2="R_des"/>
+    </connection>
+    <connection>
+        <map_components component_1="environment" component_2="R_des"/>
+        <map_variables variable_1="t" variable_2="t"/>
+    </connection>
+</model>
