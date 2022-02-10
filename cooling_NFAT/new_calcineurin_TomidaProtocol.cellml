@@ -1,4 +1,4 @@
-<?xml version='1.0'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <model cmeta:id="calcineurin" name="calcineurin" xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cellml="http://www.cellml.org/cellml/1.1#" xmlns:cmeta="http://www.cellml.org/metadata/1.0#">
     <!--
 *******************************************************
@@ -19,12 +19,12 @@
 -->
     <component name="calcineurin">
         <variable cmeta:id="v0" initial_value="1" name="Ntot" public_interface="out" units="uM"/>
-        <variable cmeta:id="v1" initial_value="6" name="M" units="uM"/>
-        <variable cmeta:id="v2" initial_value="0.535" name="K_mN" units="uM"/>
-        <variable cmeta:id="v3" initial_value="2.92" name="n" units="dimensionless"/>
+        <variable cmeta:id="v1" initial_value="6" name="M" public_interface="out" units="uM"/>
+        <variable cmeta:id="v2" initial_value="0.535" name="K_mN" public_interface="out" units="uM"/>
+        <variable cmeta:id="v3" initial_value="2.92" name="n" public_interface="out" units="dimensionless"/>
         <variable cmeta:id="v4" name="Ca" public_interface="in" units="uM"/>
         <variable cmeta:id="v5" name="act_N" public_interface="out" units="dimensionless"/>
-        <variable cmeta:id="v6" initial_value="1.760" name="K_dN" units="uM"/>
+        <variable cmeta:id="v6" initial_value="1.760" name="K_dN" public_interface="out" units="uM"/>
         <variable cmeta:id="v7" name="t" public_interface="in" units="s"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
