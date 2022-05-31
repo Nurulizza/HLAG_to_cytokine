@@ -1,0 +1,25 @@
+  PI3K/k_f2: 0.0105426 
+  PI3K/k_f3: 84.957 
+  PI3K/k_r2: 22.2918 
+  cytokines/k_f31: 0.226964 
+  cytokines/k_f32: 1.09905e-07 
+  cytokines/k_f4: 52.9216 
+  cytokines/k_f5: 253.686 
+  dupont_NFAT/kf: 0.0197873 
+  geometry/dl4cytokines_parameter/k_f1: 14.9556 
+  geometry/dl4cytokines_parameter/k_f10: 0.153129 
+  geometry/dl4cytokines_parameter/k_f21: 0.00190881 
+  geometry/dl4cytokines_parameter/k_f22: 0.0520366 
+  geometry/dl4cytokines_parameter/k_f23: 8.38185 
+  geometry/dl4cytokines_parameter/k_f24: 0.0843858 
+  geometry/dl4cytokines_parameter/k_f5: 1.73679 
+  geometry/dl4cytokines_parameter/k_r1: 0.638522 
+  geometry/dl4cytokines_parameter/k_r10: 0.00400892 
+  geometry/dl4cytokines_parameter/k_r21: 0.425985 
+  geometry/dl4cytokines_parameter/k_r23: 0.590196 
+  geometry/dl4cytokines_parameter/k_r4: 0.00413713 
+  geometry/dl4cytokines_parameter/k_r6: 0.0418391 
+  hG_FC/k_f21: 0.00490815 
+  hG_FC/k_r21: 10.8554 
+
+Ssq[1.63597379e-08 7.33738500e-09 9.02235291e-09]
