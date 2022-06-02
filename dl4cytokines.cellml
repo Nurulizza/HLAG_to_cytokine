@@ -1,4 +1,4 @@
-<?xml version='1.0'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <model name="dl4cytokines" xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cellml="http://www.cellml.org/cellml/1.1#" xmlns:xlink="http://www.w3.org/1999/xlink">
     <import xlink:href="hG_activation.cellml">
         <component component_ref="hGactivating" name="hGactivating"/>
@@ -127,6 +127,7 @@
         <variable name="J5" public_interface="in" units="uM_per_s"/>
         <variable name="J_hGdl4" public_interface="in" units="uM_per_s"/>
         <variable initial_value="1" name="FC" public_interface="out" units="uM"/>
+        <!--1-->
         <variable initial_value="0" name="hGdl4FC" public_interface="out" units="uM"/>
         <variable initial_value="0" name="hGdl4" units="uM"/>
         <variable initial_value="0.016521" name="k_f21" units="per_uM_per_s"/>
